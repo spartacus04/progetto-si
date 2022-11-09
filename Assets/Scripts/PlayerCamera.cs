@@ -12,8 +12,6 @@ public class PlayerCamera : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log(other, other.gameObject);
-        Debug.Log(other.tag);
         if(other.CompareTag("CameraWalls")) {
             StartCoroutine(anim(other));
         }
