@@ -674,7 +674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
-  speed: 2
+  speed: 3
   camera: {fileID: 945667157}
   rb: {fileID: 0}
 --- !u!212 &1183769223
