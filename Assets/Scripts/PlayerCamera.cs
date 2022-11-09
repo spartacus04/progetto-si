@@ -34,12 +34,12 @@ public class PlayerCamera : MonoBehaviour
             case "Left":
                 animator.SetTrigger("Coverleft");
                 yield return new WaitForSeconds(5f/6f);
-                transform.position += new Vector3(1, 0, 0);
+                transform.position += new Vector3(-1, 0, 0);
                 break;
             case "Right":
                 animator.SetTrigger("Coverright");
                 yield return new WaitForSeconds(5f/6f);
-                transform.position += new Vector3(-1, 0, 0);
+                transform.position += new Vector3(1, 0, 0);
                 break;
         }
 
