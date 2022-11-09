@@ -8,13 +8,20 @@ public class RoomBehaviour : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D other) {
 		if(other.CompareTag("Player")) {
 			// Chiedo scusa per questo schifo
-			var confiner = other.GetComponent<PlayerMovement>()
+			var player = other.gameObject;
+
+			var confiner = player.GetComponent<PlayerMovement>()
 				.camera
 				.GetComponent<CinemachineConfiner>();
-
 			
 
-			confiner.m_BoundingShape2D = GetComponent<PolygonCollider2D>();
+			StartCoroutine(fadeIn(confiner));
+
 		}
+	}
+
+	IEnumerator fadeIn(CinemachineConfiner confiner) {
+		yield return new WaitForSeconds(5f/6f);
+		confiner.m_BoundingShape2D = GetComponent<PolygonCollider2D>();
 	} 
 }
