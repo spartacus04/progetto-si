@@ -4,20 +4,43 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public bool canMove = false;
-    public float speed = 1.0f;
-    private Rigidbody2D rb;
+	public bool canMove = true;
+    public float speed = 10;
+    public new GameObject camera;
+
+    [HideInInspector]
+    private Vector2 movement;
+    [HideInInspector]
+    public Rigidbody2D rb;
+    private static PlayerMovement instance;
+
+    public void Awake()
+    {
+        if(instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
+    // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
+        if (!canMove)
+        {
+            movement = Vector2.zero;
+            return;
+        }
+        
+        movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+    }
 
-        rb.velocity = (new Vector2(x, y)).normalized * Time.deltaTime * speed;
+    void FixedUpdate()
+    {
+        rb.velocity = movement * speed * 200 * Time.fixedDeltaTime;
     }
 }
