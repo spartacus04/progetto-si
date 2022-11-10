@@ -31,8 +31,8 @@ public class Pushable : Interactable
     }
 
 
-	public override void OnCollisionEnter2D(Collision2D other) {
-		if(!isDesert) {
+	void OnCollisionEnter2D(Collision2D other) {
+		if(!isDesert && !other.gameObject.CompareTag("Player")) {
 			direction = Vector2.zero;
 			canInteract = true;
 		}

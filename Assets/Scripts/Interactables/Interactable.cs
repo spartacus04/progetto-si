@@ -22,7 +22,5 @@ public abstract class Interactable : MonoBehaviour
 		}
     }
 
-	public virtual void OnCollisionEnter2D(Collision2D other) {}
-
 	public abstract void onInteract();
 }
