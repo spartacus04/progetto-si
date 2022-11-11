@@ -55,7 +55,7 @@ public class NPC : MonoBehaviour
         
     }
 
-    bool isActive;
+   public bool isActive;
     void CanTalk(bool InRange)
     {
         

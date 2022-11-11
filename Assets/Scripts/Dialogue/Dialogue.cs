@@ -9,9 +9,12 @@ public class Dialogue : MonoBehaviour
     [SerializeField] TextMeshProUGUI message;
     GameObject canvas;
     PlayerMovement Player;
+    NPC npc;
     int i = 0;
     private void Start()
     {
+        var NPC = GameObject.Find("NPC");
+        npc = NPC.GetComponent<NPC>();
         var player = GameObject.Find("Player");
         Player = player.GetComponent<PlayerMovement>();
         canvas = GameObject.Find("DialogueCanvasGameobject(Clone)");
@@ -23,7 +26,8 @@ public class Dialogue : MonoBehaviour
     {
         if (i >= NPCdialogue.Message.Count)
         {
-            Player.canMove = true;   
+            Player.canMove = true;
+            npc.isActive = false;
             Destroy(canvas);
           
             return;
