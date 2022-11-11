@@ -29,7 +29,8 @@ public class Dialogue : MonoBehaviour
             Player.canMove = true;
             npc.isActive = false;
             Destroy(canvas);
-          
+
+
             return;
         }
     }
@@ -37,10 +38,10 @@ public class Dialogue : MonoBehaviour
     
     public void UpdateMessage()
     {
-        
         i++;
+		if(i >= NPCdialogue.Message.Count) return;
+
         message.text = NPCdialogue.Message[i];
-       
     }
 
 }

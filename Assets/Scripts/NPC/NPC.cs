@@ -25,7 +25,7 @@ public class NPC : MonoBehaviour
         isActive = false;
         //cache player gameobject di scena
         player = GameObject.Find("Player");
-        //controllo se c'è il player o meno e mi serve per limitare i movimenti grazie al bool all interno dello script del movimento
+        //controllo se c'ï¿½ il player o meno e mi serve per limitare i movimenti grazie al bool all interno dello script del movimento
         if (player != null)
         {
             Player = player.GetComponent<PlayerMovement>();
@@ -55,7 +55,7 @@ public class NPC : MonoBehaviour
         
     }
 
-   public bool isActive;
+   	public bool isActive;
     void CanTalk(bool InRange)
     {
         
