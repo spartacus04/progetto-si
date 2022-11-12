@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Pushable : Interactable
+public class Pushable : Interactable, ThemeHandler
 {
 	public float speed = 1f;
 	public bool isDesert = true;
@@ -33,6 +31,7 @@ public class Pushable : Interactable
 
 	void OnCollisionEnter2D(Collision2D other) {
 		if(!isDesert && !other.gameObject.CompareTag("Player")) {
+			transform.position = new Vector2(Mathf.Round(transform.position.x * 2) / 2, Mathf.Round(transform.position.y * 2) / 2);
 			direction = Vector2.zero;
 			canInteract = true;
 		}
@@ -83,4 +82,14 @@ public class Pushable : Interactable
 				break;
 		}
 	}
+
+    public void onOcean()
+    {
+		isDesert = false;
+    }
+
+    public void onDesert()
+    {
+		isDesert = true;
+    }
 }
