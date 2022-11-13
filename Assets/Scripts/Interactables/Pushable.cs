@@ -24,7 +24,7 @@ public class Pushable : Interactable, ThemeHandler
 
 
 		if(isDesert && Vector2.Distance(oPos, transform.position) > 1) {
-			transform.position = new Vector2(Mathf.Round(transform.position.x * 2) / 2, Mathf.Round(transform.position.y * 2) / 2);
+			transform.position = new Vector2(Mathf.Round(transform.position.x + 0.5f) - 0.5f, Mathf.Round(transform.position.y + 0.5f) - 0.5f);
 			direction = Vector2.zero;
 			canInteract = true;
 		}
@@ -33,7 +33,7 @@ public class Pushable : Interactable, ThemeHandler
 
 	void OnCollisionEnter2D(Collision2D other) {
 		if(!other.gameObject.CompareTag("Player")) {
-			transform.position = new Vector2(Mathf.Round(transform.position.x * 2) / 2, Mathf.Round(transform.position.y * 2) / 2);
+			transform.position = new Vector2(Mathf.Round(transform.position.x + 0.5f) - 0.5f, Mathf.Round(transform.position.y + 0.5f) - 0.5f);
 			direction = Vector2.zero;
 			canInteract = true;
 		}

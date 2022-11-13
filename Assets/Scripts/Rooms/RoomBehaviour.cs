@@ -27,7 +27,6 @@ public class RoomBehaviour : MonoBehaviour
 			var confiner = player.GetComponent<PlayerMovement>()
 				.camera
 				.GetComponent<CinemachineConfiner>();
-			
 
 			StartCoroutine(fadeIn(confiner));
 		}
@@ -55,6 +54,9 @@ public class RoomBehaviour : MonoBehaviour
 			fadeInAnim.onTransition(1f);
 
 			Utils.setTimeout(() => {
+				// Chiedo scusa di nuovo per questo altro schifo
+				player.GetComponent<PlayerMovement>().camera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = RoomState.GetComponent<PolygonCollider2D>();
+
 				player.transform.position = (Vector2)playerStart.position;
 
 				if(!ThemeSwitcher.isDesert && defaultStyleIsDesert) {
