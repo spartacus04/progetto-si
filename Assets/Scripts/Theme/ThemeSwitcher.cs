@@ -6,8 +6,7 @@ using System.Linq;
 public class ThemeSwitcher : MonoBehaviour
 {
     private PlayerMovement player;
-    public bool isDesert;
-    public ThemeHandler[] handlers;
+    public static bool isDesert = true;
     private GameObject[] transitionObjects;
     public TransitionManager transitionManager;
     public float speed;
@@ -15,12 +14,13 @@ public class ThemeSwitcher : MonoBehaviour
     void Start()
     {
         player = GetComponent<PlayerMovement>();
-        // Utilizzo sto schifo per prendere tutti gli oggetti che implementano l'interfaccia ThemeHandler
-        var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
-        handlers = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(ThemeHandler)) select (ThemeHandler)a).ToArray();
     }
 
     public void fireChange() {
+        // Utilizzo sto schifo per prendere tutti gli oggetti che implementano l'interfaccia ThemeHandler
+        var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
+        var handlers = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(ThemeHandler)) select (ThemeHandler)a).ToList();
+
         // Transition
         player.canMove = false;
 
@@ -28,13 +28,13 @@ public class ThemeSwitcher : MonoBehaviour
 
         Utils.setTimeout(() => {
             if(isDesert) {
-                foreach(var handler in handlers) {
-                    handler.onDesert();
-                }
+                handlers.ForEach(e => {
+                    e.onDesert();
+                });
             } else {
-                foreach(var handler in handlers) {
-                    handler.onOcean();
-                }
+                handlers.ForEach(e => {
+                    e.onOcean();
+                });
             }
         }, 1f/3f / speed);
 

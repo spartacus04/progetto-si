@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TransitionManager : MonoBehaviour
 {
-
     public Animator[] animators;
 
     public void Start() {

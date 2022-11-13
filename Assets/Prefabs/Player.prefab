@@ -178,3 +178,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDesert: 1
+  transitionManager: {fileID: 0}
+  speed: 0.5
