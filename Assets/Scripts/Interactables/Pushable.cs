@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
 
-public class Pushable : Interactable
+public class Pushable : Interactable, ThemeHandler
 {
 	public float speed = 1f;
 	public bool isDesert = true;
 	private Rigidbody2D rb;
 	private Vector2 direction = Vector2.zero;
+	private Vector2 oPos;
 
 	public override void Start() {
 		base.Start();
@@ -20,19 +20,20 @@ public class Pushable : Interactable
     {
 		base.Update();
 
-		if(isDesert) {
-			rb.MovePosition((Vector2)transform.position + direction);
+		rb.velocity = direction * Time.deltaTime * speed * 200;
+
+
+		if(isDesert && Vector2.Distance(oPos, transform.position) > 1) {
+			transform.position = new Vector2(Mathf.Round(transform.position.x + 0.5f) - 0.5f, Mathf.Round(transform.position.y + 0.5f) - 0.5f);
 			direction = Vector2.zero;
 			canInteract = true;
-		}
-		else {
-			rb.velocity = direction * Time.deltaTime * speed * 200;
 		}
     }
 
 
 	void OnCollisionEnter2D(Collision2D other) {
-		if(!isDesert && !other.gameObject.CompareTag("Player")) {
+		if(!other.gameObject.CompareTag("Player")) {
+			transform.position = new Vector2(Mathf.Round(transform.position.x + 0.5f) - 0.5f, Mathf.Round(transform.position.y + 0.5f) - 0.5f);
 			direction = Vector2.zero;
 			canInteract = true;
 		}
@@ -52,7 +53,6 @@ public class Pushable : Interactable
 		};
 
 		var distances = orientations.Select(
-
 			orientation => Vector2.Distance(orientation, playerPos)
 		).ToArray();
 
@@ -67,6 +67,8 @@ public class Pushable : Interactable
 				break;
 			}
 		}
+
+		oPos = transform.position;
 
 		switch(closerIndex) {
 			case 0:
@@ -83,4 +85,14 @@ public class Pushable : Interactable
 				break;
 		}
 	}
+
+    public void onOcean()
+    {
+		isDesert = false;
+    }
+
+    public void onDesert()
+    {
+		isDesert = true;
+    }
 }
