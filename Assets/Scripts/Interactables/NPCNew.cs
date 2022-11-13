@@ -16,6 +16,8 @@ public class NPCNew : Interactable, ThemeHandler
     public float textSpeed;
     public GameObject canvas;
     public TextMeshProUGUI text;
+
+    
     private Animator animator;
     private SpriteRenderer sr;
     private PlayerMovement pm;
