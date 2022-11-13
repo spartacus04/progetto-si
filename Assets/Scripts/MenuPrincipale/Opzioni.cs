@@ -4,22 +4,71 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System;
+using TMPro;
 
 public class Opzioni : MonoBehaviour
 {
+#nullable enable
     string datapath;
-    public GameObject OpzioniCanvas;
+
     ConfigData data;
-    Resolution[] resolutions;
+    Resolution[]  resolutions;
     List<Resolution> filteredResolutions;
     private float currentRefreshRate;
     private int currentResolutionIndex;
     public Dropdown dropdownres;
+    [SerializeField] Toggle fullscreen;
+
+
+     [SerializeField]
+    TextMeshProUGUI qualita;
+    [SerializeField]
+
+    TextMeshProUGUI? risoluzione;
+    [SerializeField]
+
+    TextMeshProUGUI fulls;
+
+#nullable disable
+
+    public void AggiornaTxT()
+	{
+        if (data.qualitysettings == 2)
+		{
+            qualita.text = "Qualità: Media";
+            
+        }
+
+		if (data.qualitysettings == 3)
+		{
+            qualita.text = "Qualità: Alta";
+		}
+       if (data.qualitysettings == 5)
+        {
+            qualita.text = "Qualità: Ultra";
+        }
+
+        risoluzione.text = $"Risoluzione: {data.resWidth}x{data.resheight}";
+
+		if (data.fullscreen)
+		{
+            fulls.text = "FullScreen: ON";
+		}
+		else
+		{
+
+            fulls.text = "FullScreen: OFF";
+        }
+
+    }
 
     void Start()
     {
-        Screen.SetResolution(Screen.width, Screen.height, true);
-        resolutions = Screen.resolutions;
+
+        #region res;
+        
+        
+		resolutions = Screen.resolutions;
         filteredResolutions = new List<Resolution>();
         dropdownres.ClearOptions();
         currentRefreshRate = Screen.currentResolution.refreshRate;
@@ -36,8 +85,8 @@ public class Opzioni : MonoBehaviour
 
         List<string> options = new List<string>();
 		for (int i = 0; i < filteredResolutions.Count; i++)
-		{
-            string resolutionOption = filteredResolutions[i].width + "x" + filteredResolutions[i].height + "" + filteredResolutions[i].refreshRate + "Hz";
+		{ 
+            string resolutionOption = filteredResolutions[i].width + "x" + filteredResolutions[i].height + " " + filteredResolutions[i].refreshRate + "Hz";
             options.Add(resolutionOption);
             if (filteredResolutions[i].width == Screen.width && filteredResolutions[i].height == Screen.height) 
 			{
@@ -47,24 +96,54 @@ public class Opzioni : MonoBehaviour
 		}
         dropdownres.AddOptions(options);
         dropdownres.value = currentResolutionIndex;
+        
         dropdownres.RefreshShownValue();
+        #endregion
         #region datapath&load
         datapath = $"{ Application.persistentDataPath}/Settings";
         print(datapath);
-        Load();
-        #endregion
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!Directory.Exists(datapath))
         {
-            OpzioniCanvas.SetActive(false);
+
+            Directory.CreateDirectory(datapath);
+        }
+        Load();
+        
+        if (data.resheight!=0 && data.resWidth!=0)
+        {
+            SetRess();
+            print($"{data.resWidth}x{data.resheight}");
+        }
+        else
+        {
+            data.resheight = Screen.height;
+            data.resWidth = Screen.width;
+            Screen.SetResolution(Screen.width, Screen.height, true);
+            print($"{Screen.width}x{Screen.height}");
         }
 
+
+            FullScreen();
+         
+	
+		if(!data.fullscreen)
+		{
+            Screen.fullScreen = false;
+            print(data.fullscreen);
+		}
+
+        if (data.qualitysettings != 0)
+        {
+            SetQuality();
+            print(data.qualitysettings);
+        }
+
+
+#endregion
+        AggiornaTxT();
+
     }
+
 
     #region quality
     public void SetQuality()
@@ -86,11 +165,7 @@ public class Opzioni : MonoBehaviour
     public void save()
     {
 
-        if (!Directory.Exists(datapath))
-        {
-
-            Directory.CreateDirectory(datapath);
-        }
+        
 
         string jsonData = JsonUtility.ToJson(data, true);
         File.WriteAllText($"{datapath}/settings.config", jsonData);
@@ -102,7 +177,6 @@ public class Opzioni : MonoBehaviour
         {
             data = new ConfigData();
             data.qualitysettings = 5;
-            
             data.fullscreen = true;
             string jsonDatas = JsonUtility.ToJson(data, true);
             File.WriteAllText($"{datapath}/settings.config", jsonDatas);
@@ -112,28 +186,30 @@ public class Opzioni : MonoBehaviour
         string jsonData = File.ReadAllText($"{datapath}/settings.config");
         data = JsonUtility.FromJson<ConfigData>(jsonData);
 
-
+        fullscreen.isOn = data.fullscreen;
         
     }
     #endregion
 
 
     #region fullscreen
-    [SerializeField] Toggle fullscreen;
 	public void FullScreen()
     {
+        
         Screen.fullScreen = data.fullscreen;
+		
+       
     }
     public void SetDatafullscreen()
 	{
-        if (fullscreen.isOn)
-            data.fullscreen = true;
-        else
-            data.fullscreen = false;
+       
+            data.fullscreen = fullscreen.isOn;
+            
 	}
-    #endregion
+	#endregion
 
-    public void SetRes(int resIndex)
+	#region resolution
+	public void SetRes(int resIndex)
     {
         
         Resolution res = resolutions[resIndex];
@@ -141,7 +217,7 @@ public class Opzioni : MonoBehaviour
 
         data.resWidth = res.width;
         data.resheight = res.height;
-
+  
 
     }
 
@@ -150,6 +226,7 @@ public class Opzioni : MonoBehaviour
         Screen.SetResolution(data.resWidth, data.resheight, true);
     }
 
+    #endregion
 }
 
 
