@@ -1233,6 +1233,17 @@ PolygonCollider2D:
       - {x: -20, y: -20}
       - {x: 20, y: -20}
       - {x: 20, y: 20}
+--- !u!114 &1943079710 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5801341101810734101, guid: 95e88f2470561d243a820bd5019afead, type: 3}
+  m_PrefabInstance: {fileID: 6847047138376441610}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0b652f32a2cc243917e4028fa0f046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1995134260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,6 +1356,14 @@ PrefabInstance:
     - target: {fileID: 5801341100903640767, guid: 95e88f2470561d243a820bd5019afead, type: 3}
       propertyPath: m_Name
       value: SettingsManagerMenuInGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5801341101962117872, guid: 95e88f2470561d243a820bd5019afead, type: 3}
+      propertyPath: qualityDropDown
+      value: 
+      objectReference: {fileID: 1943079710}
+    - target: {fileID: 5801341101962117873, guid: 95e88f2470561d243a820bd5019afead, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95e88f2470561d243a820bd5019afead, type: 3}

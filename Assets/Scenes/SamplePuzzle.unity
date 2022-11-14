@@ -694,6 +694,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingsManagerMenuInGame
       objectReference: {fileID: 0}
+    - target: {fileID: 5801341100903640767, guid: 95e88f2470561d243a820bd5019afead, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5801341101962117873, guid: 95e88f2470561d243a820bd5019afead, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847047137267055097, guid: 95e88f2470561d243a820bd5019afead, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -23.7908
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847047137267055097, guid: 95e88f2470561d243a820bd5019afead, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.7711182
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847047137267055097, guid: 95e88f2470561d243a820bd5019afead, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.56658936
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847047137614859654, guid: 95e88f2470561d243a820bd5019afead, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.7711
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847047137614859654, guid: 95e88f2470561d243a820bd5019afead, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -143
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847047137719568721, guid: 95e88f2470561d243a820bd5019afead, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95e88f2470561d243a820bd5019afead, type: 3}
 --- !u!1 &475088293

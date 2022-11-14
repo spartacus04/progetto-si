@@ -2,239 +2,100 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
-using System;
-using TMPro;
+using UnityEngine.Events;
+
 
 public class Opzioni : MonoBehaviour
 {
-#nullable enable
-    string datapath;
 
-    ConfigData data;
-    Resolution[]  resolutions;
-    List<Resolution> filteredResolutions;
-    private float currentRefreshRate;
-    private int currentResolutionIndex;
-    public Dropdown dropdownres;
-    [SerializeField] Toggle fullscreen;
+    public Dropdown qualityDropDown;
+    public Dropdown resolutionsDropDown;
+    public Toggle FullScreenToggle;
+    private int ScreenInt;
+    Resolution[] resolutions;
+    private bool isFullScreen=false;
+    const string prefName = "optionvalue";
+    const string resName = "resolutionoption";
 
-
-     [SerializeField]
-    TextMeshProUGUI qualita;
-    [SerializeField]
-
-    TextMeshProUGUI? risoluzione;
-    [SerializeField]
-
-    TextMeshProUGUI fulls;
-
-#nullable disable
-
-    public void AggiornaTxT()
-	{
-        if (data.qualitysettings == 2)
-		{
-            qualita.text = "Qualità: Media";
-            
-        }
-
-		if (data.qualitysettings == 3)
-		{
-            qualita.text = "Qualità: Alta";
-		}
-       if (data.qualitysettings == 5)
+    private void Awake()
+    {
+        ScreenInt = PlayerPrefs.GetInt("togglestate");
+        if (ScreenInt == 1) 
         {
-            qualita.text = "Qualità: Ultra";
+            isFullScreen = true;
+            FullScreenToggle.isOn = true;
+
+        }else
+        {
+            FullScreenToggle.isOn = false;
+
         }
+        resolutionsDropDown.onValueChanged.AddListener(new UnityAction<int>(Index => {
+            PlayerPrefs.SetInt(resName, resolutionsDropDown.value);
+            PlayerPrefs.Save();
 
-        risoluzione.text = $"Risoluzione: {data.resWidth}x{data.resheight}";
+        }));
 
-		if (data.fullscreen)
-		{
-            fulls.text = "FullScreen: ON";
-		}
-		else
-		{
 
-            fulls.text = "FullScreen: OFF";
+          qualityDropDown.onValueChanged.AddListener(new UnityAction<int>(Index => {
+            PlayerPrefs.SetInt(prefName, qualityDropDown.value);
+            PlayerPrefs.Save();
+
+        }));
+
+}
+      private void Start()
+     {
+        qualityDropDown.value = PlayerPrefs.GetInt(prefName, 3);
+        resolutions = Screen.resolutions;
+        resolutionsDropDown.ClearOptions();
+        List<string> options = new List<string>();
+        int currentResolutionIndex = 0;
+
+        for(int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + "x" + resolutions[i].height + " " + resolutions[i].refreshRate + "Hz";
+            options.Add(option);
+            if(resolutions[i].width==Screen.currentResolution.width
+                && resolutions[i].height==Screen.currentResolution.height 
+                && resolutions[i].refreshRate == Screen.currentResolution.refreshRate)
+            {
+                currentResolutionIndex = i;
+            }
         }
+           resolutionsDropDown.AddOptions(options);
+           resolutionsDropDown.value = PlayerPrefs.GetInt(resName, currentResolutionIndex);
+           resolutionsDropDown.RefreshShownValue();
+    }
+
+    public void SetResolution(int resolutionIndex)
+    {
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+    }
+    public void setQuality(int Quality)
+    {
+        QualitySettings.SetQualityLevel(Quality);
 
     }
 
-    void Start()
+    public void setFullScreen(bool isFullScreen)
     {
-
-        #region res;
-        
-        
-		resolutions = Screen.resolutions;
-        filteredResolutions = new List<Resolution>();
-        dropdownres.ClearOptions();
-        currentRefreshRate = Screen.currentResolution.refreshRate;
-
-		for (int i = 0; i < resolutions.Length; i++)
-		{
-            if(resolutions[i].refreshRate == currentRefreshRate)
-			{
-                filteredResolutions.Add(resolutions[i]);
-
-			}
-
-		}
-
-        List<string> options = new List<string>();
-		for (int i = 0; i < filteredResolutions.Count; i++)
-		{ 
-            string resolutionOption = filteredResolutions[i].width + "x" + filteredResolutions[i].height + " " + filteredResolutions[i].refreshRate + "Hz";
-            options.Add(resolutionOption);
-            if (filteredResolutions[i].width == Screen.width && filteredResolutions[i].height == Screen.height) 
-			{
-                currentResolutionIndex = i;
-			}
-
-		}
-        dropdownres.AddOptions(options);
-        dropdownres.value = currentResolutionIndex;
-        
-        dropdownres.RefreshShownValue();
-        #endregion
-        #region datapath&load
-        datapath = $"{ Application.persistentDataPath}/Settings";
-        print(datapath);
-        if (!Directory.Exists(datapath))
+        Screen.fullScreen = isFullScreen;
+        if (isFullScreen==false) 
         {
 
-            Directory.CreateDirectory(datapath);
-        }
-        Load();
+            PlayerPrefs.SetInt("togglestate", 0);
         
-        if (data.resheight!=0 && data.resWidth!=0)
-        {
-            SetRess();
-            print($"{data.resWidth}x{data.resheight}");
         }
+                   
         else
         {
-            data.resheight = Screen.height;
-            data.resWidth = Screen.width;
-            Screen.SetResolution(Screen.width, Screen.height, true);
-            print($"{Screen.width}x{Screen.height}");
+            isFullScreen = true;
+            PlayerPrefs.SetInt("togglestate", 1);
         }
-
-
-            FullScreen();
-         
-	
-		if(!data.fullscreen)
-		{
-            Screen.fullScreen = false;
-            print(data.fullscreen);
-		}
-
-        if (data.qualitysettings != 0)
-        {
-            SetQuality();
-            print(data.qualitysettings);
-        }
-
-
-#endregion
-        AggiornaTxT();
-
     }
 
-
-    #region quality
-    public void SetQuality()
-    {
-        QualitySettings.SetQualityLevel(data.qualitysettings);
-
-    }
-
-    public void setData(int qualityindex)
-    {
-
-
-        data.qualitysettings = qualityindex;
-
-    }
-    #endregion
-
-    #region save&loadMethod
-    public void save()
-    {
-
-        
-
-        string jsonData = JsonUtility.ToJson(data, true);
-        File.WriteAllText($"{datapath}/settings.config", jsonData);
-    }
-    public void Load()
-    {
-
-        if (!File.Exists($"{datapath}/settings.config"))
-        {
-            data = new ConfigData();
-            data.qualitysettings = 5;
-            data.fullscreen = true;
-            string jsonDatas = JsonUtility.ToJson(data, true);
-            File.WriteAllText($"{datapath}/settings.config", jsonDatas);
-            return;
-        }
-
-        string jsonData = File.ReadAllText($"{datapath}/settings.config");
-        data = JsonUtility.FromJson<ConfigData>(jsonData);
-
-        fullscreen.isOn = data.fullscreen;
-        
-    }
-    #endregion
-
-
-    #region fullscreen
-	public void FullScreen()
-    {
-        
-        Screen.fullScreen = data.fullscreen;
-		
-       
-    }
-    public void SetDatafullscreen()
-	{
-       
-            data.fullscreen = fullscreen.isOn;
-            
-	}
-	#endregion
-
-	#region resolution
-	public void SetRes(int resIndex)
-    {
-        
-        Resolution res = resolutions[resIndex];
-
-
-        data.resWidth = res.width;
-        data.resheight = res.height;
-  
-
-    }
-
-    public void SetRess()
-	{
-        Screen.SetResolution(data.resWidth, data.resheight, true);
-    }
-
-    #endregion
 }
-
-
-[Serializable]
-public class ConfigData
-{
-    public int resWidth;
-    public int resheight;
-    public bool fullscreen;
-    public int qualitysettings;
-}
+    

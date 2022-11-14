@@ -31,4 +31,6 @@ public class MenuinGame : MonoBehaviour
 		}
 
 	}
+    public void esci() { Application.Quit(); }
+    
 }
