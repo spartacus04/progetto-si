@@ -28,7 +28,6 @@ public class BombScript : MonoBehaviour
 		{
 			yield return !canExplose;
 			yield return new WaitForSeconds(time);
-			
 			Destroy(this.gameObject);
 		}
 
@@ -46,12 +45,14 @@ public class BombScript : MonoBehaviour
 
 
 
-		Collider2D[] Oggetti = Physics2D.OverlapCircleAll(transform.position, radius, CanExplodeLayers);
+		Collider2D[] Oggetti = Physics2D.OverlapCircleAll(this.transform.position, radius, CanExplodeLayers);
+
+		print(Oggetti.Length);
 		
-		foreach (Collider2D canexplodes in Oggetti)
+		foreach(Collider2D og in Oggetti)
 		{
-			
-			canexplodes.GetComponent<IBombable>().canExplode();
+
+			og.GetComponent<IBombable>().canExplode();
 			
 
 		}

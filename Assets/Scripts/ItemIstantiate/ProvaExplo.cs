@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProvaExplo : MonoBehaviour,IBombable
 {
-    // Start is called before the first frame update
+   
     void Start()
     {
         
@@ -13,10 +13,10 @@ public class ProvaExplo : MonoBehaviour,IBombable
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
-
-    public void canExplode()
+    
+     public void canExplode()
 	{
         Destroy(this.gameObject);
 	}
