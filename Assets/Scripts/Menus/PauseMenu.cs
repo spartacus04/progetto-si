@@ -4,33 +4,46 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] KeyCode interactkey;
-	[SerializeField] GameObject Menu;
-	[SerializeField] GameObject MenuOptions;
+    public KeyCode interactkey;
+	public GameObject menu;
+	public GameObject optMenu;
+	private bool isOpen = false;
+	private bool isOptOpen = false;
 
 	void Update()
     {
-		if (Input.GetKeyDown(interactkey) && !Menu.activeSelf && !MenuOptions.activeSelf)
-		{
+		if(!Input.GetKeyDown(interactkey)) return;
+
+		if(isOpen) {
+			if(isOptOpen) {
+				optMenu.SetActive(false);
+				menu.SetActive(true);
+				isOptOpen = false;
+			} else {
+				Time.timeScale = 1;
+				menu.SetActive(false);
+				isOpen = false;
+			}
+		} else {
 			Time.timeScale = 0;
-			Menu.SetActive(true);
-		} else if(Input.GetKeyDown(interactkey) && Menu.activeSelf && !MenuOptions.activeSelf)
-		{
-			Menu.SetActive(false);
-		}else if (Input.GetKeyDown(interactkey) && !Menu.activeSelf && MenuOptions.activeSelf)
-		{
-			MenuOptions.SetActive(false);
-			Menu.SetActive(true);
-
-		}
-
-		if (!Menu.activeSelf && !MenuOptions.activeSelf)
-		{
-			Time.timeScale = 1;
+			menu.SetActive(true);
+			isOpen = true;
 		}
 	}
-    public void esci() {
+
+	public void openOptionsMenu() {
+		menu.SetActive(false);
+		optMenu.SetActive(true);
+		isOptOpen = true;
+	}
+
+    public void quit() {
 		Application.Quit();
 	}
-    
+
+	public void closeMenu() {
+		Time.timeScale = 1;
+		menu.SetActive(false);
+		isOpen = false;
+	}
 }

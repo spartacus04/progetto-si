@@ -68,7 +68,6 @@ public class OptionsMenu : MonoBehaviour
 
 
 struct Options {
-	
 	public Options(int quality, int resolution, bool fullscreen) {
 		this.quality = quality;
 		this.resolution = resolution;

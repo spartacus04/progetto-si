@@ -1467,7 +1467,7 @@ GameObject:
   - component: {fileID: 5801341100903640753}
   - component: {fileID: 5801341100903640758}
   m_Layer: 0
-  m_Name: SettingsManagerMenuInGame
+  m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1499,12 +1499,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5801341100903640767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fd095ed233f7184dad7555586c286d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 35c6cefcbb7ed7d209e372c264281e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactkey: 27
-  Menu: {fileID: 6847047137719568721}
-  MenuOptions: {fileID: 5801341101962117873}
+  menu: {fileID: 6847047137719568721}
+  optMenu: {fileID: 5801341101962117873}
 --- !u!1 &5801341101027451016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2936,7 +2936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   qualityDropDown: {fileID: 5184299102793804861}
-  resolutionsDropDown: {fileID: 5801341101810734101}
+  resolutionDropdown: {fileID: 5801341101810734101}
   FullScreenToggle: {fileID: 5801341100668196282}
 --- !u!1 &5801341102005063685
 GameObject:
@@ -3863,22 +3863,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6847047137719568721}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5801341101962117873}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 5801341100903640758}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: openOptionsMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4221,10 +4209,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6847047137719568721}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 5801341100903640758}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: closeMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

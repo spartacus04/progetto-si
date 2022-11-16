@@ -652,15 +652,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5801341100903640753, guid: 95e88f2470561d243a820bd5019afead, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 598.90576
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5801341100903640753, guid: 95e88f2470561d243a820bd5019afead, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 245.4914
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5801341100903640753, guid: 95e88f2470561d243a820bd5019afead, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.7685947
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5801341100903640753, guid: 95e88f2470561d243a820bd5019afead, type: 3}
       propertyPath: m_LocalRotation.w
@@ -692,7 +692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5801341100903640767, guid: 95e88f2470561d243a820bd5019afead, type: 3}
       propertyPath: m_Name
-      value: SettingsManagerMenuInGame
+      value: PauseMenu
       objectReference: {fileID: 0}
     - target: {fileID: 5801341100903640767, guid: 95e88f2470561d243a820bd5019afead, type: 3}
       propertyPath: m_IsActive
