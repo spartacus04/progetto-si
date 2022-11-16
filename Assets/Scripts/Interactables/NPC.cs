@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Linq;
 
-public class NPCNew : Interactable, ThemeHandler
+public class NPC : Interactable, ThemeHandler
 {
     public string animDesert;
     public string animOcean;

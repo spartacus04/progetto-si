@@ -16,6 +16,7 @@ public class Utils : MonoBehaviour
         }
     }
 
+	// impossibile vivere senza setTimeout
     public static void setTimeout(Action action, float time)
     {
         instance.StartCoroutine(WaitAndExecute(time, action));

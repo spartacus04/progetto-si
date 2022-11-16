@@ -7,13 +7,12 @@ using UnityEngine.Events;
 
 public class Opzioni : MonoBehaviour
 {
-
     public Dropdown qualityDropDown;
     public Dropdown resolutionsDropDown;
     public Toggle FullScreenToggle;
     private int ScreenInt;
     Resolution[] resolutions;
-    private bool isFullScreen=false;
+    private bool isFullScreen;
     const string prefName = "optionvalue";
     const string resName = "resolutionoption";
 
