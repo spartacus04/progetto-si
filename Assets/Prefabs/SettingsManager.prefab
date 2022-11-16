@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   qualityDropDown: {fileID: 3595263041873942404}
-  resolutionsDropDown: {fileID: 5294093447135626693}
+  resolutionDropdown: {fileID: 0}
   FullScreenToggle: {fileID: 3178803592895384900}
 --- !u!1 &1118891512181281818
 GameObject:
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   qualityDropDown: {fileID: 3595263041873942404}
-  resolutionsDropDown: {fileID: 5294093447135626693}
+  resolutionDropdown: {fileID: 5294093447135626693}
   FullScreenToggle: {fileID: 3178803592895384900}
 --- !u!1 &2078766509146207101
 GameObject:

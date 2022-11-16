@@ -29,10 +29,21 @@ public class OptionsMenu : MonoBehaviour
 		FullScreenToggle.isOn = oldOptions.fullscreen;
 	}
 
-
-	private void Awake()
+	private void Start()
 	{
+		Debug.Log(this, this.gameObject);
+		
+		resolutionDropdown.ClearOptions();
+
+		resolutionDropdown.AddOptions(Screen.resolutions.Select(
+			r => $"{r.width}x{r.height}@{r.refreshRate}Hz"
+		).ToList());
+
+		int index = Screen.resolutions.ToList().FindIndex(r => r.Equals(Screen.currentResolution));
+		resolutionDropdown.value = index;
+
 		loadValues();
+		resolutionDropdown.RefreshShownValue();
 
 		// Add dropdown listeners
 		resolutionDropdown.onValueChanged.AddListener(new UnityAction<int>(i => {
@@ -43,19 +54,6 @@ public class OptionsMenu : MonoBehaviour
 		qualityDropDown.onValueChanged.AddListener(new UnityAction<int>(i => {
 			newOptions.quality = i;
 		}));
-	}
-
-	private void Start()
-	{
-		resolutionDropdown.ClearOptions();
-
-		resolutionDropdown.AddOptions(Screen.resolutions.Select(
-			r => $"{r.width}x{r.height}@{r.refreshRate}Hz"
-		).ToList());
-
-		int index = Screen.resolutions.ToList().FindIndex(r => r.Equals(Screen.currentResolution));
-		resolutionDropdown.value = index;
-		resolutionDropdown.RefreshShownValue();
 	}
 
 	public void Apply() {
