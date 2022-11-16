@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuinGame : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
     [SerializeField] KeyCode interactkey;
 	[SerializeField] GameObject Menu;
@@ -14,7 +14,7 @@ public class MenuinGame : MonoBehaviour
 		{
 			Time.timeScale = 0;
 			Menu.SetActive(true);
-		}else if(Input.GetKeyDown(interactkey) && Menu.activeSelf && !MenuOptions.activeSelf)
+		} else if(Input.GetKeyDown(interactkey) && Menu.activeSelf && !MenuOptions.activeSelf)
 		{
 			Menu.SetActive(false);
 		}else if (Input.GetKeyDown(interactkey) && !Menu.activeSelf && MenuOptions.activeSelf)
@@ -24,13 +24,13 @@ public class MenuinGame : MonoBehaviour
 
 		}
 
-
 		if (!Menu.activeSelf && !MenuOptions.activeSelf)
 		{
 			Time.timeScale = 1;
 		}
-
 	}
-    public void esci() { Application.Quit(); }
+    public void esci() {
+		Application.Quit();
+	}
     
 }

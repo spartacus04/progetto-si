@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuPrincipoale : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
-    [SerializeField] string indexscena;
+	public Scene scene;
     public void Play()
 	{
-        SceneManager.LoadScene(indexscena);
+        SceneManager.LoadScene(scene.name);
 	}
 
     public void Quit()
