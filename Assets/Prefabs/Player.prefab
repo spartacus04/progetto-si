@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1421494398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1421494399}
+  m_Layer: 0
+  m_Name: PointSpawnBomb
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1421494399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421494398}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7133163285691382158}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7133163285691382147
 GameObject:
   m_ObjectHideFlags: 0
@@ -15,6 +46,7 @@ GameObject:
   - component: {fileID: 7133163285691382156}
   - component: {fileID: 7133163285691382157}
   - component: {fileID: 1047867889238629801}
+  - component: {fileID: 1183769238}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -33,7 +65,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1421494399}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -105,6 +138,8 @@ MonoBehaviour:
   speed: 1
   camera: {fileID: 0}
   rb: {fileID: 0}
+  instanziaBomba: {fileID: 1421494398}
+  distanceBomb: 1.5
 --- !u!50 &7133163285691382159
 Rigidbody2D:
   serializedVersion: 4
@@ -177,6 +212,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529830662d45ca747aa8b0d01f28d512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDesert: 1
   transitionManager: {fileID: 0}
   speed: 0.5
+--- !u!114 &1183769238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133163285691382147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3da2fb85911da9c99293365d57efa0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bomb: {fileID: 1846151581501918986, guid: 15f97a387b7e4d54eaf5218d83ca2554, type: 3}
+  spawnBomb: {fileID: 1421494398}
+  CanDropBomb: 1
+  bombTimer: 1
+  bombTimerReset: 1
+  bombRadius: 1

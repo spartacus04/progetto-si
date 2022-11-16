@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         
-        movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+        movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 		direction(distanceBomb);
 	}
 

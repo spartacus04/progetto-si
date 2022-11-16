@@ -861,34 +861,11 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 1208623728}
   m_ConfineScreenEdges: 1
   m_Damping: 0
---- !u!1 &1183769221 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7133163285691382147, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
-  m_PrefabInstance: {fileID: 7133163286873299718}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1183769224 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7133163285691382158, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
   m_PrefabInstance: {fileID: 7133163286873299718}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1183769238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1183769221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3da2fb85911da9c99293365d57efa0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bomb: {fileID: 1846151581501918986, guid: 15f97a387b7e4d54eaf5218d83ca2554, type: 3}
-  spawnBomb: {fileID: 1421494398}
-  CanDropBomb: 1
-  bombTimer: 1
-  bombTimerReset: 1
-  bombRadius: 1
 --- !u!1 &1208623726
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,37 +1063,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1421494398
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1421494399}
-  m_Layer: 0
-  m_Name: PointSpawnBomb
-  m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1421494399
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1421494398}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1183769224}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1518029614
 GameObject:
@@ -1549,14 +1495,6 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 945667157}
-    - target: {fileID: 7133163285691382144, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
-      propertyPath: distanceBomb
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7133163285691382144, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
-      propertyPath: instanziaBomba
-      value: 
-      objectReference: {fileID: 1421494398}
     - target: {fileID: 7133163285691382147, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
       propertyPath: m_Name
       value: Player
