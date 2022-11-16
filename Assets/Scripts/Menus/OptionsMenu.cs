@@ -31,8 +31,6 @@ public class OptionsMenu : MonoBehaviour
 
 	private void Start()
 	{
-		Debug.Log(this, this.gameObject);
-		
 		resolutionDropdown.ClearOptions();
 
 		resolutionDropdown.AddOptions(Screen.resolutions.Select(
@@ -49,7 +47,6 @@ public class OptionsMenu : MonoBehaviour
 		resolutionDropdown.onValueChanged.AddListener(new UnityAction<int>(i => {
 			newOptions.resolution = i;
 		}));
-
 
 		qualityDropDown.onValueChanged.AddListener(new UnityAction<int>(i => {
 			newOptions.quality = i;

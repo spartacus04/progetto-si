@@ -5,24 +5,18 @@ using System.Linq;
 
 public class Bomb : MonoBehaviour
 {
-	[SerializeField] 
 	private float radius;
 
-	[SerializeField]
 	private float time;
 	
-	public bool canExplode = true;
-
-	private void Start()
-	{
-		setOff();		
+	public void setup(float radius, float time) {
+		this.radius = radius;
+		this.time = time;
+		setOff();
 	}
 
 	public void setOff()
 	{
-		if(!canExplode) return;
-		canExplode = false;
-
 		Utils.setTimeout(() => {
 			explode();
 		}, time);

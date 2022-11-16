@@ -10,6 +10,8 @@ public class BombAbility : MonoBehaviour
 	public float bombTimer = 0.5f;
 	public float bombTimerReset = 0.5f;
 
+	public float bombRadius = 1f;
+
 	private float lastTimer;
 
 	private void Start()
@@ -29,7 +31,8 @@ public class BombAbility : MonoBehaviour
 			CanDropBomb = false;
 			lastTimer = Time.time;
 
-			Instantiate(bomb, transform.position, Quaternion.identity);
+			var bombI = Instantiate(bomb, transform.position, Quaternion.identity);
+			bombI.GetComponent<Bomb>().setup(bombRadius, bombTimer);
 		}
 	}
 }
