@@ -16,10 +16,10 @@ public class PlayerMovement : MonoBehaviour
 	Vector2 lastPosition;
     [SerializeField]
 	GameObject instanziaBomba;
-	bool facingRight;
-	bool facingLeft;
-	bool facingDown;
-	bool facingUp;
+    public bool facingRight;
+	public bool facingLeft;
+	public bool facingDown;
+	public bool facingUp;
 	[SerializeField]
 	float distanceBomb;
 
@@ -39,9 +39,8 @@ public class PlayerMovement : MonoBehaviour
 
 	void direction(float distanceBomb)
 	{
-		
 
-        facingRight = (movement.x > 0) ? true : false;
+		facingRight = (movement.x > 0) ? true : false;
 		facingLeft = (movement.x < 0) ? true : false;
 		facingDown = (movement.y < 0) ? true : false;
 	    facingUp = (movement.y > 0) ? true : false;
@@ -61,11 +60,16 @@ public class PlayerMovement : MonoBehaviour
 		else if (facingDown)
 		{
 			instanziaBomba.transform.position = new Vector2(transform.position.x, transform.position.y-distanceBomb);
-
 		}
 
+	
 
 
+	}
+	void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere(instanziaBomba.transform.position, 0.4f);
 	}
 
 	void Update()
