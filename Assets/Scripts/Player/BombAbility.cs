@@ -5,6 +5,7 @@ using UnityEngine;
 public class BombAbility : MonoBehaviour
 {
 	[SerializeField] GameObject bomb;
+    [SerializeField] GameObject spawnBomb;
 	public bool CanDropBomb;
 
 	public float bombTimer = 0.5f;
@@ -19,8 +20,11 @@ public class BombAbility : MonoBehaviour
 		lastTimer = Time.time;
 	}
 
+	
 	private void Update()
 	{
+		
+
 		if(lastTimer + bombTimer + bombTimerReset + Time.deltaTime < Time.time)
 		{
 			CanDropBomb = true;
@@ -31,7 +35,7 @@ public class BombAbility : MonoBehaviour
 			CanDropBomb = false;
 			lastTimer = Time.time;
 
-			var bombI = Instantiate(bomb, transform.position, Quaternion.identity);
+			var bombI = Instantiate(bomb, spawnBomb.transform.position, Quaternion.identity);
 			bombI.GetComponent<Bomb>().setup(bombRadius, bombTimer);
 		}
 	}

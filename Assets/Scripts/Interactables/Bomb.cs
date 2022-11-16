@@ -17,6 +17,7 @@ public class Bomb : MonoBehaviour
 
 	public void setOff()
 	{
+		Debug.Log(time);
 		Utils.setTimeout(() => {
 			explode();
 		}, time);
