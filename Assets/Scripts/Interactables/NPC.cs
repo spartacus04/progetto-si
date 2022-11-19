@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Linq;
 
-public class NPC : Interactable, ThemeHandler
+public class NPC : MonoBehaviour, Interactable, ThemeHandler
 {
     public string animDesert;
     public string animOcean;
@@ -49,8 +49,10 @@ public class NPC : Interactable, ThemeHandler
         messages = textOcean.ToList();
     }
 
-    public override void onInteract()
+    public void onInteract(GameObject player)
     {
+        pm = player.GetComponent<PlayerMovement>();
+
         if(!isDialogueOpen) {
             isDialogueOpen = true;
 
@@ -96,14 +98,11 @@ public class NPC : Interactable, ThemeHandler
         isWriting = false;
     }
 
-    public override void Start()
+    public void Start()
     {
-        base.Start();
-
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
 
-        pm = player.GetComponent<PlayerMovement>();
         iconImage.texture = icon.texture;
 
         messages = ThemeSwitcher.isDesert ? textDesert.ToList() : textOcean.ToList();

@@ -2,29 +2,28 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
-public class Pushable : Interactable, ThemeHandler
+public class Pushable : MonoBehaviour, Interactable
 {
+	public float interactRadius { get; set; } = 1f;
+	public bool canInteract {get; set; } = true;
 	public float speed = 1f;
-	public bool isDesert = true;
 	private Rigidbody2D rb;
 	private Vector2 direction = Vector2.zero;
 	private Vector2 oPos;
 
-	public override void Start() {
-		base.Start();
-
+	public void Start() {
 		rb = GetComponent<Rigidbody2D>();
 	}
 
-    public override void Update()
+    public void Update()
     {
-		base.Update();
-
 		rb.velocity = direction * Time.deltaTime * speed * 200;
 
-
-		if(isDesert && Vector2.Distance(oPos, transform.position) > 1) {
+		if(canInteract) {
 			transform.position = new Vector2(Mathf.Round(transform.position.x + 0.5f) - 0.5f, Mathf.Round(transform.position.y + 0.5f) - 0.5f);
+		}
+
+		if(Vector2.Distance(oPos, transform.position) > 1 && !canInteract) {
 			direction = Vector2.zero;
 			canInteract = true;
 		}
@@ -39,7 +38,7 @@ public class Pushable : Interactable, ThemeHandler
 		}
 	}
 
-	public override void onInteract()
+	public void onInteract(GameObject player)
 	{
 		canInteract = false;
 
@@ -85,14 +84,4 @@ public class Pushable : Interactable, ThemeHandler
 				break;
 		}
 	}
-
-    public void onOcean()
-    {
-		isDesert = false;
-    }
-
-    public void onDesert()
-    {
-		isDesert = true;
-    }
 }

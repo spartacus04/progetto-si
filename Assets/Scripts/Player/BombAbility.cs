@@ -6,7 +6,7 @@ public class BombAbility : MonoBehaviour
 {
 
 	[SerializeField] GameObject bomb;
-    [SerializeField] GameObject spawnBomb;
+    Transform spawnLoc;
 	public bool CanDropBomb;
 
 	public float bombTimer = 0.5f;
@@ -17,18 +17,16 @@ public class BombAbility : MonoBehaviour
 
 	[Header("Bomb Quantity")]
 	[SerializeField] int maxQuantity;
-	private int quantityBomb=0;
+	private int quantityBomb = 0;
 	private void Start()
 	{
+		spawnLoc = GetComponent<PlayerMovement>().interactLocation;
 		lastTimer = Time.time;
 	}
-
-
 	
 	private void Update()
 	{
-		var controllo = Physics2D.OverlapCircleAll(spawnBomb.transform.position, 0.2f);
-		print(controllo.Length);
+		var controllo = Physics2D.OverlapCircleAll(spawnLoc.position, 0.2f);
 		
 		if (lastTimer + bombTimer + bombTimerReset + Time.deltaTime < Time.time)
 		{
@@ -42,7 +40,7 @@ public class BombAbility : MonoBehaviour
 			CanDropBomb = false;
 			lastTimer = Time.time;
 
-			var bombI = Instantiate(bomb, spawnBomb.transform.position, Quaternion.identity);
+			var bombI = Instantiate(bomb, spawnLoc.position, Quaternion.identity);
 			quantityBomb++;
 			bombI.GetComponent<Bomb>().setup(bombRadius, bombTimer);
 		}

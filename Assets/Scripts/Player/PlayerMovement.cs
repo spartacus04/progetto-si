@@ -14,14 +14,12 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private static PlayerMovement instance;
 	Vector2 lastPosition;
-    [SerializeField]
-	GameObject instanziaBomba;
-    public bool facingRight;
-	public bool facingLeft;
-	public bool facingDown;
-	public bool facingUp;
-	[SerializeField]
-	float distanceBomb;
+	
+	public Transform interactLocation;
+
+	[HideInInspector]
+	public Vector2 facingDirection = Vector2.zero;
+	public float interactDist = 0.9f;
 
 	public void Awake()
     {
@@ -37,44 +35,23 @@ public class PlayerMovement : MonoBehaviour
 		lastPosition = this.transform.position;
     }
 
-	void direction(float distanceBomb)
+	void direction()
 	{
-
-		facingRight = (movement.x > 0) ? true : false;
-		facingLeft = (movement.x < 0) ? true : false;
-		facingDown = (movement.y < 0) ? true : false;
-	    facingUp = (movement.y > 0) ? true : false;
-
-		if (facingRight)
-		{
-			instanziaBomba.transform.position = new Vector2(transform.position.x + distanceBomb, transform.position.y);
-		}
-		else if(facingLeft)
-		{
-			instanziaBomba.transform.position = new Vector2(transform.position.x - distanceBomb, transform.position.y);
-
-		}else if (facingUp)
-		{
-			instanziaBomba.transform.position = new Vector2(transform.position.x, transform.position.y+distanceBomb);
-		}
-		else if (facingDown)
-		{
-			instanziaBomba.transform.position = new Vector2(transform.position.x, transform.position.y-distanceBomb);
+		if(movement.y > 0) {
+			facingDirection = Vector2.up;
+		} else if(movement.y < 0) {
+			facingDirection = Vector2.down;
+		} else if(movement.x > 0) {
+			facingDirection = Vector2.right;
+		} else if(movement.x < 0) {
+			facingDirection = Vector2.left;
 		}
 
-	
-
-
-	}
-	void OnDrawGizmosSelected()
-	{
-		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(instanziaBomba.transform.position, 0.4f);
+		interactLocation.localPosition = (Vector3)facingDirection * interactDist;
 	}
 
 	void Update()
     {
-		
         if (!canMove)
         {
             movement = Vector2.zero;
@@ -82,11 +59,17 @@ public class PlayerMovement : MonoBehaviour
         }
         
         movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-		direction(distanceBomb);
+		direction();
 	}
 
     void FixedUpdate()
     {
         rb.velocity = movement * speed * 200 * Time.fixedDeltaTime;
     }
+
+	void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere(interactLocation.position, 0.4f);
+	}
 }
