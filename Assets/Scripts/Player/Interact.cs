@@ -17,7 +17,12 @@ public class Interact : MonoBehaviour {
 		var colliders = Physics2D.OverlapCircleAll(interactLoc.position, interactRadius);
 
 		colliders.ToList().ForEach(collider => {
-			collider.GetComponent<Interactable>()?.onInteract(gameObject);
+			var inter = collider.GetComponent<Interactable>();
+
+			if(inter != null) {
+				inter.onInteract(gameObject);
+				return;
+			}
 		});
 	}
 }
