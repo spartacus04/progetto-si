@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using System.Linq;
 
+// Chiedo perdono per lo schifo di codice
 public class Box : MonoBehaviour
 {
 	public bool isWaterMode = false;
@@ -108,9 +109,7 @@ public class Box : MonoBehaviour
 		// check if one of the children has tag player and get it
 		if(other.transform.parent != transform) return;
 		if(!other.GetComponent<PlayerMovement>().isLocked) return;
-
-		isMoving = true;
-
+		if(isMoving) return;
 
 		if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)) return;
 			// player is riding box
@@ -130,7 +129,6 @@ public class Box : MonoBehaviour
 				other.GetComponent<PlayerMovement>().isLocked = false;
 				other.GetComponent<Collider2D>().enabled = true;
 
-				isMoving = false;
 			}, 1f/3f);
 	}
 
