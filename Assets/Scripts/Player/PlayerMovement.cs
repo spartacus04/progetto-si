@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	public bool canMove = true;
+	public bool isLocked = true;
     public float speed = 10;
     public new GameObject camera;
 
@@ -12,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movement;
     [HideInInspector]
     public Rigidbody2D rb;
-    private static PlayerMovement instance;
 	Vector2 lastPosition;
 	
 	public Transform interactLocation;
@@ -20,14 +20,6 @@ public class PlayerMovement : MonoBehaviour
 	[HideInInspector]
 	public Vector2 facingDirection = Vector2.zero;
 	public float interactDist = 0.9f;
-
-	public void Awake()
-    {
-        if(instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
-    }
 
     void Start()
     {
@@ -60,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         
         movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 		direction();
+		if(isLocked) movement = Vector2.zero;
 	}
 
     void FixedUpdate()

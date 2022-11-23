@@ -123,30 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &44640755 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7133163285691382147, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
-  m_PrefabInstance: {fileID: 1727131064}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &62665597 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7133163285691382158, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
   m_PrefabInstance: {fileID: 1727131064}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &62665605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 44640755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c99c825456f594fff9761c47ba2376c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactRadius: 0.5
-  canInteract: 1
 --- !u!1 &110130563
 GameObject:
   m_ObjectHideFlags: 0
@@ -11539,11 +11520,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!4 &1286400347 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1421494399, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
-  m_PrefabInstance: {fileID: 1727131064}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1305877317
 GameObject:
   m_ObjectHideFlags: 0
@@ -14971,20 +14947,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 607791833}
     - target: {fileID: 7133163285691382144, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
-      propertyPath: interactLocation
-      value: 
-      objectReference: {fileID: 1286400347}
-    - target: {fileID: 7133163285691382145, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
+      propertyPath: isLocked
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7133163285691382147, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7133163285691382147, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7133163285691382157, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
       propertyPath: animator
@@ -15032,18 +15000,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133163285691382158, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7133163285691382159, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
-      propertyPath: m_Mass
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7133163285691382159, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7133163285691382159, guid: 3985812a5c17d5f44bbeb9b8ab7ebfde, type: 3}
-      propertyPath: m_LinearDrag
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

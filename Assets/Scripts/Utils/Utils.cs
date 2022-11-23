@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Utils : MonoBehaviour
 {
@@ -27,4 +28,14 @@ public class Utils : MonoBehaviour
         yield return new WaitForSeconds(time);
         action();
     }
+
+	public static List<GameObject> FindGameObjectsWithLayer(int layer){
+     	var arr = FindObjectsOfType<GameObject>();
+
+     	// Filter objects with layer
+
+		return arr.Where(
+	 		go => go.layer == layer
+	 	).ToList();
+	}
 }
