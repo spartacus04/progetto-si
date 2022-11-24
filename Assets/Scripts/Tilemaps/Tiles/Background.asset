@@ -33,17 +33,9 @@ MonoBehaviour:
     e33: 1
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
-  m_ColliderType: 1
+  m_ColliderType: 0
+  tileType: 0
   oceanSprites:
-  - {fileID: -1603583723, guid: 1f614ef2d6ea5164f85da72ee69beb4f, type: 3}
+  - {fileID: -1541386032, guid: 1f614ef2d6ea5164f85da72ee69beb4f, type: 3}
   desertSprites:
-  - {fileID: 1773078630, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
-  - {fileID: -1350830641, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
-  - {fileID: -675315709, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
-  - {fileID: 1585590253, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
-  - {fileID: 1773078630, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
-  - {fileID: 1773078630, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
-  - {fileID: 1773078630, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
-  - {fileID: 1773078630, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
-  - {fileID: 1773078630, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
   - {fileID: 1773078630, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}

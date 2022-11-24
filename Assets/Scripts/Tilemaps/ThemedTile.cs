@@ -19,10 +19,10 @@ public class ThemedTile : Tile
 	public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
 	{
 		if(oceanSprites.Count == 1) oceanSprite = oceanSprites[0];
-		else oceanSprite = oceanSprites[Random.Range(0, desertSprites.Count)];
+		else oceanSprite = oceanSprites[Random.Range(0, oceanSprites.Count)];
 
 		if(desertSprites.Count == 1) desertSprite = desertSprites[0];
-        else desertSprite = desertSprites[Random.Range(0, oceanSprites.Count)];
+        else desertSprite = desertSprites[Random.Range(0, desertSprites.Count)];
 
 		switch (tileType)
 		{
@@ -43,10 +43,6 @@ public class ThemedTile : Tile
 
 	public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
 	{
-		if(tileData.gameObject != null) {
-			tileData.gameObject.layer = 4;
-		}
-
 		base.GetTileData(position, tilemap, ref tileData);
 
 		if(ThemeSwitcher.isDesert) {

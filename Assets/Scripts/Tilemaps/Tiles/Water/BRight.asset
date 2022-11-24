@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0eed6379c1dee1bec9df1dd2dbc35c56, type: 3}
-  m_Name: Water
+  m_Name: BRight
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -39,5 +39,4 @@ MonoBehaviour:
   - {fileID: -164159662, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
   - {fileID: -824669088, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
   desertSprites:
-  - {fileID: -164159662, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
-  - {fileID: -824669088, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
+  - {fileID: 2097836490, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}

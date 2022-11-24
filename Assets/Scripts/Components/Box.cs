@@ -26,11 +26,13 @@ public class Box : MonoBehaviour
 
 			Utils.setTimeout(() => {
 				Destroy(GetComponent<Pushable>());
+				StartCoroutine(InterpLocation(transform, transform.position, transform.position + new Vector3(0, -0.5f, 0), 1f/50f));
 			}, 1 / pushable.speed);
 
 			cl.size = new Vector2(1f, 1f);
 
 			cl.isTrigger = true;
+
 		}
 		else if(other.gameObject.CompareTag("Player") && isWaterMode) {
 			cl.isTrigger = true;

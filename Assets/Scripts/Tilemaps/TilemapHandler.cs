@@ -8,10 +8,15 @@ public class TilemapHandler : MonoBehaviour, ThemeHandler
 {
 	public Tilemap waterMap;
 	private Tilemap tm;
+	public Tilemap waterBg;
+	public RuleTile waterTile;
 
 	void Start()
 	{
 		tm = GetComponent<Tilemap>();
+
+		copyTiles();
+
 		var splicedTiles = spliceTiles();
 
 		foreach(KeyValuePair<Vector2, ThemedTile> entry in splicedTiles) {
@@ -19,18 +24,21 @@ public class TilemapHandler : MonoBehaviour, ThemeHandler
 		}
 
 		waterMap.gameObject.SetActive(true);
+		waterBg.RefreshAllTiles();
 	}
 
     public void onDesert()
     {
 		waterMap.RefreshAllTiles();
 		tm.RefreshAllTiles();
+		waterBg.gameObject.SetActive(false);
     }
 
     public void onOcean()
     {
 		waterMap.RefreshAllTiles();
 		tm.RefreshAllTiles();
+		waterBg.gameObject.SetActive(true);
     }
 
 	public Dictionary<Vector2, ThemedTile> spliceTiles() {
@@ -54,5 +62,22 @@ public class TilemapHandler : MonoBehaviour, ThemeHandler
 		}
 		
 		return tiles;
+	}
+
+	public void copyTiles() {
+		var bounds = tm.cellBounds;
+		TileBase[] allTiles = tm.GetTilesBlock(bounds);
+
+		for (int x = bounds.xMin; x < bounds.xMax; x++) {
+			for (int y = bounds.yMin; y < bounds.yMax; y++) {
+
+				var tile = allTiles[x - bounds.xMin + (y - bounds.yMin) * bounds.size.x] as ThemedTile;
+				Debug.Log(tile);
+
+				if(tile != null && tile.tileType == ThemedTile.TileType.Background) {
+					waterBg.SetTile(new Vector3Int(x, y, 0), waterTile);
+				}
+			}
+		}
 	}
 }

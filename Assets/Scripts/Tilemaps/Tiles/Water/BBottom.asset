@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0eed6379c1dee1bec9df1dd2dbc35c56, type: 3}
-  m_Name: Water
+  m_Name: BBottom
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -36,8 +36,8 @@ MonoBehaviour:
   m_ColliderType: 2
   tileType: 1
   oceanSprites:
-  - {fileID: -164159662, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
-  - {fileID: -824669088, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
+  - {fileID: -1603583723, guid: 1f614ef2d6ea5164f85da72ee69beb4f, type: 3}
+  - {fileID: -1172261206, guid: 1f614ef2d6ea5164f85da72ee69beb4f, type: 3}
   desertSprites:
-  - {fileID: -164159662, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
-  - {fileID: -824669088, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
+  - {fileID: -3250263, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
+  - {fileID: 765560194, guid: 4ef9057a7b7270139a272ef049f395ec, type: 3}
