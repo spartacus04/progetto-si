@@ -11,10 +11,13 @@ public class Box : MonoBehaviour
 	private BoxCollider2D cl;
 	private List<CompositeCollider2D> waterColliders;
 	private bool isMoving = false;
+	private Transform spriteRenderer;
 
 	public void Start() {
 		cl = GetComponent<BoxCollider2D>();
 		waterColliders = Utils.FindGameObjectsWithLayer(LayerMask.NameToLayer("Water")).Select(go => go.GetComponent<CompositeCollider2D>()).ToList();
+
+		spriteRenderer = transform.GetChild(0);
 	}
 
 	private void OnCollisionEnter2D(Collision2D other) {
@@ -26,7 +29,7 @@ public class Box : MonoBehaviour
 
 			Utils.setTimeout(() => {
 				Destroy(GetComponent<Pushable>());
-				StartCoroutine(InterpLocation(transform, transform.position, transform.position + new Vector3(0, -0.5f, 0), 1f/50f));
+				StartCoroutine(InterpLocation(spriteRenderer, spriteRenderer.position, spriteRenderer.position + new Vector3(0, -0.5f, 0), 1f/5f));
 			}, 1 / pushable.speed);
 
 			cl.size = new Vector2(1f, 1f);

@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
+  isLocked: 1
   speed: 1
   camera: {fileID: 0}
   rb: {fileID: 0}
