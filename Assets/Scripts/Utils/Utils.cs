@@ -39,4 +39,13 @@ public class Utils : MonoBehaviour
 	 		go => go.layer == layer
 	 	).ToList();
 	}
+
+    public static Vector3 roundToNearestHalf(Vector3 v) {
+        // Round to nearest 0.5 (0.5, 1.5, 2.5, etc)
+        return new Vector3(
+            Mathf.Round(v.x * 2) / 2,
+            Mathf.Round(v.y * 2) / 2,
+            Mathf.Round(v.z * 2) / 2
+        );
+    }
 }

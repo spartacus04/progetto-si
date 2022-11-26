@@ -116,24 +116,27 @@ public class Box : MonoBehaviour
 		if(!other.GetComponent<PlayerMovement>().isLocked) return;
 		if(isMoving) return;
 
+
 		if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)) return;
 			// player is riding box
 			var PlayerMovement = other.GetComponent<PlayerMovement>();
 
-			var elements = Physics2D.OverlapCircleAll(PlayerMovement.interactLocation.position * 1.2f, 0.4f);
+			var targetPos = Utils.roundToNearestHalf(PlayerMovement.interactLocation.position * 1.2f);
+			Debug.Log(targetPos);
+
+			var elements = Physics2D.OverlapCircleAll(targetPos, 0.4f);
 
 			if(elements.Length > 1) return;
 
 			unsetGameobjectAsChildren(other.gameObject);
 
-			StartCoroutine(InterpLocation(other.transform, transform.position, PlayerMovement.interactLocation.position * 1.05f, 1f/3f));
+			StartCoroutine(InterpLocation(other.transform, transform.position, targetPos, 1f/3f));
 
 			Utils.setTimeout(() => {
 				cl.isTrigger = true;
 
 				other.GetComponent<PlayerMovement>().isLocked = false;
 				other.GetComponent<Collider2D>().enabled = true;
-
 			}, 1f/3f);
 	}
 
@@ -145,6 +148,8 @@ public class Box : MonoBehaviour
             yield return 0;
         }
 
+
+		Debug.Log(target);
 		ts.position = target;
 	}
 
