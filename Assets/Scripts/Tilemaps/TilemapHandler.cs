@@ -72,7 +72,6 @@ public class TilemapHandler : MonoBehaviour, ThemeHandler
 			for (int y = bounds.yMin; y < bounds.yMax; y++) {
 
 				var tile = allTiles[x - bounds.xMin + (y - bounds.yMin) * bounds.size.x] as ThemedTile;
-				Debug.Log(tile);
 
 				if(tile != null && tile.tileType == ThemedTile.TileType.Background) {
 					waterBg.SetTile(new Vector3Int(x, y, 0), waterTile);

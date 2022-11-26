@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Tilemaps;
 
 public class Pushable : MonoBehaviour, Interactable {
 	public float interactRadius { get; set; } = 1f;
@@ -13,27 +14,31 @@ public class Pushable : MonoBehaviour, Interactable {
 
 	[HideInInspector]
 	public bool canPush = true;
+	private Tilemap tilemap;
 
 	public void Start() {
+		tilemap = GameObject.Find("MainTilemap").GetComponent<Tilemap>();
 		rb = GetComponent<Rigidbody2D>();
 	}
 
-    public void Update()
-    {
-		// rb.velocity = direction * Time.deltaTime * speed * 200;
-    }
+	/*private void OnCollisionEnter2D(Collision2D other) {
+		if(other.gameObject.layer == 4) return;
 
-	private void OnCollisionEnter2D(Collision2D other) {
-		/*if(!other.gameObject.CompareTag("Player")) {
-			transform.position = new Vector2(Mathf.Round(transform.position.x * 2) / 2, Mathf.Round(transform.position.y * 2) / 2);
+		if(!other.gameObject.CompareTag("Player")) {
 			StopAllCoroutines();
+			StartCoroutine(InterpLocation(transform.position, new Vector2(Mathf.Round(transform.position.x + 0.5f) - 0.5f, Mathf.Round(transform.position.y + 0.5f) - 0.5f), 1f/speed));
+			Utils.setTimeout(() => {
+				canPush = true;
+			}, 1f/speed);
 			direction = Vector2.zero;
-		}*/
-	}
+		}
+	}*/
 
 	public void onInteract(GameObject player)
 	{
 		if(!canPush) return;
+
+		canPush = false;
 
 		var playerPos = player.transform.position;
 
@@ -77,18 +82,27 @@ public class Pushable : MonoBehaviour, Interactable {
 				break;
 		}
 
+		var tile = (ThemedTile)tilemap.GetTile(tilemap.WorldToCell((Vector3)transform.position + (Vector3)direction));
+
+		if(tile != null) {
+			if(tile.tileType == ThemedTile.TileType.Border) {
+				canPush = true;
+				return;
+			}
+		}
+
 		StartCoroutine(InterpLocation(transform.position, transform.position + (Vector3)direction, 1 / speed));
 	}
 
 	IEnumerator InterpLocation(Vector2 start, Vector2 target, float duration) {
 		for (float t = 0f; t < duration; t += Time.deltaTime)
         {
-            Vector2 lerped = Vector2.Lerp(start, target, t / duration);
-            transform.position = new Vector2(lerped.x, lerped.y);
+            transform.position = Vector2.Lerp(start, target, t / duration);
             yield return 0;
         }
 
 		transform.position = target;
 		direction = Vector2.zero;
+		canPush = true;
 	}
 }
