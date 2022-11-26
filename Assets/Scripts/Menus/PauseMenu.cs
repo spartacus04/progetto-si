@@ -10,9 +10,7 @@ public class PauseMenu : MonoBehaviour
 	private bool isOpen = false;
 	private bool isOptOpen = false;
 
-	void Update()
-    {
-		
+	void Update() {
 #if UNITY_WEBGL 
 		if(!Input.GetKeyDown(KeyCode.P)) return;
 #else
