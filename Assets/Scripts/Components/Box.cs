@@ -7,6 +7,10 @@ using System.Linq;
 public class Box : MonoBehaviour
 {
 	public bool isWaterMode = false;
+	public LayerMask IgnoreLayer;
+	public GameObject player;
+
+		public PlayerMovement pMovement;
 
 	private BoxCollider2D cl;
 	private List<CompositeCollider2D> waterColliders;
@@ -18,6 +22,8 @@ public class Box : MonoBehaviour
 		waterColliders = Utils.FindGameObjectsWithLayer(LayerMask.NameToLayer("Water")).Select(go => go.GetComponent<CompositeCollider2D>()).ToList();
 
 		spriteRenderer = transform.GetChild(0);
+		player = GameObject.FindGameObjectWithTag("Player");
+		pMovement = player.GetComponent<PlayerMovement>();
 	}
 
 	private void OnCollisionEnter2D(Collision2D other) {
@@ -30,29 +36,19 @@ public class Box : MonoBehaviour
 			Utils.setTimeout(() => {
 				Destroy(GetComponent<Pushable>());
 				StartCoroutine(InterpLocation(spriteRenderer, spriteRenderer.position, spriteRenderer.position + new Vector3(0, -0.5f, 0), 1f/5f));
+
+				cl.size = new Vector2(1f, 1f);
+				cl.isTrigger = true;
 			}, 1 / pushable.speed);
-
-			cl.size = new Vector2(1f, 1f);
-
-			cl.isTrigger = true;
-
-		}
-		else if(other.gameObject.CompareTag("Player") && isWaterMode) {
-			cl.isTrigger = true;
-
-			OnTriggerStay2D(other.collider);
 		}
 	}
 
-	private void OnTriggerStay2D(Collider2D other) {
-		if(other.CompareTag("Player")) {
-			handlePlayer(other);
-			return;
-		}
-	}
+	private void OnTriggerEnter2D(Collider2D other) {
+		if(!other.CompareTag("Player")) return;
 
-	private void handlePlayer(Collider2D other) {
-		if(other.GetComponent<PlayerMovement>().isLocked || isMoving) return;
+		var pMovement = other.GetComponent<PlayerMovement>();
+
+		if(pMovement.isLocked || isMoving) return;
 
 		// Player isn't riding box
 		var playerPos = other.transform.position;
@@ -88,56 +84,46 @@ public class Box : MonoBehaviour
 			_ => KeyCode.Space
 		};
 
-		if(KeyCode.Space == data) return;
+		if(data == KeyCode.Space) return;
 
 		if(Input.GetKey(data)) {
 			// TODO: animation jump on box
-			cl.isTrigger = false;
 			isMoving = true;
-			// disable player collider and movement
-			other.GetComponent<PlayerMovement>().isLocked = true;
+
+			pMovement.isLocked = true;
 			other.GetComponent<Collider2D>().enabled = false;
 			setGameobjectAsChildren(other.gameObject);
 
 			// Replace 10 with animation length
 			StartCoroutine(InterpLocation(other.transform, other.transform.position, transform.position, 1f/3f));
-
-			Utils.setTimeout(() => {
-				isMoving = false;
-			}, 1f/3f);
 		}
 	}
 
-	private void Update() {
-		var other = GameObject.FindGameObjectWithTag("Player");
-
-		// check if one of the children has tag player and get it
-		if(other.transform.parent != transform) return;
-		if(!other.GetComponent<PlayerMovement>().isLocked) return;
+	void Update() {
+		if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)) return;
 		if(isMoving) return;
 
+		// check if one of the children has tag player and get it
+		if(player.transform.parent != transform) return;
+		if(!pMovement.isLocked) return;
+		
+		var PlayerMovement = player.GetComponent<PlayerMovement>();
 
-		if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)) return;
-			// player is riding box
-			var PlayerMovement = other.GetComponent<PlayerMovement>();
+		var targetPos = (Vector2)transform.position + pMovement.facingDirection;
 
-			var targetPos = Utils.roundToNearestHalf(PlayerMovement.interactLocation.position * 1.2f);
-			Debug.Log(targetPos);
+		Collider2D[] elements = Physics2D.OverlapCircleAll(targetPos, 0.4f, IgnoreLayer);
 
-			var elements = Physics2D.OverlapCircleAll(targetPos, 0.4f);
+		if(elements.Length == 0) {
+			// il codice all'interno dell'if è eseguito comunque (WTF)
 
-			if(elements.Length > 1) return;
-
-			unsetGameobjectAsChildren(other.gameObject);
-
-			StartCoroutine(InterpLocation(other.transform, transform.position, targetPos, 1f/3f));
+			StartCoroutine(InterpLocation(player.transform, transform.position, targetPos, 1f/3f));
 
 			Utils.setTimeout(() => {
-				cl.isTrigger = true;
-
-				other.GetComponent<PlayerMovement>().isLocked = false;
-				other.GetComponent<Collider2D>().enabled = true;
+				unsetGameobjectAsChildren(player.gameObject);
+				pMovement.isLocked = false;
+				player.GetComponent<Collider2D>().enabled = true;
 			}, 1f/3f);
+		}
 	}
 
 	IEnumerator InterpLocation(Transform ts, Vector2 start, Vector2 target, float duration) {
@@ -148,9 +134,10 @@ public class Box : MonoBehaviour
             yield return 0;
         }
 
-
-		Debug.Log(target);
 		ts.position = target;
+		isMoving = false;
+
+		yield return 0;
 	}
 
 	private void setGameobjectAsChildren(GameObject child) {

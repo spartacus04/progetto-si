@@ -16,8 +16,8 @@ TagManager:
   - CameraTrigger
   - CameraWalls
   - PlayerOnly
-  - 
-  - 
+  - Tilemap
+  - Room
   - 
   - 
   - 
