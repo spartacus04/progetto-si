@@ -20,23 +20,41 @@ public class PlayerMovement : MonoBehaviour
 	[HideInInspector]
 	public Vector2 facingDirection = Vector2.zero;
 	public float interactDist = 0.9f;
+	private Animator playerAnimator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+		playerAnimator = GetComponent<Animator>();
 		lastPosition = this.transform.position;
     }
 
 	void direction()
 	{
-		if(movement.y > 0) {
+		playerAnimator.SetFloat("Speed", 0f);
+
+		if (movement.y > 0) {
 			facingDirection = Vector2.up;
+			playerAnimator.SetTrigger("Top");
+			playerAnimator.SetFloat("Speed", 1f);
 		} else if(movement.y < 0) {
 			facingDirection = Vector2.down;
-		} else if(movement.x > 0) {
+			playerAnimator.SetTrigger("Down");
+			playerAnimator.SetFloat("Speed", 1f);
+
+		}
+		else if(movement.x > 0) {
 			facingDirection = Vector2.right;
-		} else if(movement.x < 0) {
+			playerAnimator.SetTrigger("MoveRight");
+			playerAnimator.SetFloat("Speed", 1f);
+
+		}
+		else if(movement.x < 0) {
 			facingDirection = Vector2.left;
+			playerAnimator.SetTrigger("MoveLeft");
+			playerAnimator.SetFloat("Speed", 1f);
+
+
 		}
 
 		interactLocation.localPosition = (Vector3)facingDirection * interactDist;
@@ -65,4 +83,8 @@ public class PlayerMovement : MonoBehaviour
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(interactLocation.position, 0.4f);
 	}
+
+
+
+	
 }
