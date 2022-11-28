@@ -30,6 +30,22 @@ public class Utils : MonoBehaviour
         action();
     }
 
+    public static Action setInterval(Action action, float time)
+    {
+        var repeat = true;
+
+        IEnumerator ExecuteEvery(float time, Action action)
+        {
+            while (repeat) {
+                yield return new WaitForSeconds(time);
+                action();
+            }
+        }
+
+        instance.StartCoroutine(ExecuteEvery(time, action));
+
+        return () => repeat = false;
+    }
 	public static List<GameObject> FindGameObjectsWithLayer(int layer){
      	var arr = FindObjectsOfType<GameObject>();
 
