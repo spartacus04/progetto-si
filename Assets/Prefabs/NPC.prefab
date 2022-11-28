@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4126930143153396995}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6, y: 2, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 1358933412, guid: ffdc39e7535bacae6978b0ebc3791db0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,20 +128,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animDesert: 432423
   animOcean: 342423
-  icon: {fileID: -926839633, guid: 483a75a4e3e08794f819f16ff4ff64b2, type: 3}
+  icon: {fileID: 1358933412, guid: ffdc39e7535bacae6978b0ebc3791db0, type: 3}
   iconImage: {fileID: 4126930143829591116}
   textOcean:
-  - According to all known laws of aviation, there is no way that a bee should be
-    able to fly.
-  - Its wings are too small to get its fat little body off the ground.
-  - The bee, of course, flies anyways.
-  - Because bees don't care what humans think is impossible.
+  - Ancora altra acqua...
   textDesert:
-  - According to all known laws of aviation, there is no way that a bee should be
-    able to fly.
-  - Its wings are too small to get its fat little body off the ground.
-  - The bee, of course, flies anyways.
-  - Because bees don't care what humans think is impossible.
+  - Che sfortuna!
+  - Stavo tornando al villaggio ma un inondazione improvvisa mi ha sbarrato la strada.
+  - Come posso fare ora?
   textSpeed: 0.01
   canvas: {fileID: 4126930145010590436}
   text: {fileID: 4126930143369752976}

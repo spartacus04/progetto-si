@@ -9,7 +9,7 @@ public class NPC : MonoBehaviour, Interactable, ThemeHandler
 {
     public string animDesert;
     public string animOcean;
-    public Sprite icon;
+    public Texture icon;
     public RawImage iconImage;
     public string[] textOcean;
     public string[] textDesert;
@@ -103,7 +103,7 @@ public class NPC : MonoBehaviour, Interactable, ThemeHandler
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
 
-        iconImage.texture = icon.texture;
+        iconImage.texture = icon;
 
         messages = ThemeSwitcher.isDesert ? textDesert.ToList() : textOcean.ToList();
     }
