@@ -10,6 +10,7 @@ public class ThemeSwitcher : MonoBehaviour
     private GameObject[] transitionObjects;
     public TransitionManager transitionManager;
     public float speed;
+	public bool canChange = false;
 
     void Start()
     {
@@ -45,7 +46,7 @@ public class ThemeSwitcher : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) || canChange)
         {
             isDesert = !isDesert;
             fireChange();
