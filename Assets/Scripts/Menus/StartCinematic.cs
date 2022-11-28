@@ -10,7 +10,7 @@ public class StartCinematic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponent<VideoPlayer>();
+        player = GetComponentInChildren<VideoPlayer>();
 
 		var autoSkip = player.clip.length;
 
