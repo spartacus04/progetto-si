@@ -14,7 +14,7 @@ public class AudioHandler : MonoBehaviour, ThemeHandler {
     }
 
     public void onOcean() {
-        StartCoroutine(volumeFromTo(1, 0, 1f/3f));
+        StartCoroutine(volumeFromTo(0.2f, 0, 1f/3f));
 
         Utils.setTimeout(() => {
             var seconds = audioSource.time;
@@ -25,7 +25,7 @@ public class AudioHandler : MonoBehaviour, ThemeHandler {
     }
 
     public void onDesert() {
-        StartCoroutine(volumeFromTo(1, 0, 1f/3f));
+        StartCoroutine(volumeFromTo(0.2f, 0, 1f/3f));
         
         Utils.setTimeout(() => {
             var seconds = audioSource.time;
