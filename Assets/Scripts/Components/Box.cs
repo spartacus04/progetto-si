@@ -43,7 +43,17 @@ public class Box : MonoBehaviour
 		}
 	}
 
+	private void OnTriggerStay2D(Collider2D other) {
+		if(other.gameObject.GetComponent<WaterCurrent>() == null) return;
+		Debug.Log("water");
+
+        if(ThemeSwitcher.isDesert) return;
+        
+		transform.position += (Vector3)other.GetComponent<WaterCurrent>().direction * Time.deltaTime;
+	}
+
 	private void OnTriggerEnter2D(Collider2D other) {
+
 		if(!other.CompareTag("Player")) return;
 
 		var pMovement = other.GetComponent<PlayerMovement>();

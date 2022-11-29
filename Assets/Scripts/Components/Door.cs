@@ -5,20 +5,22 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     private Collider2D col;
+    private Animator anim;
 
     private void Start() {
         col = GetComponent<Collider2D>();
+        anim = GetComponent<Animator>();
     }
 
     public void Open() {
-        Debug.Log("Opening door");
         col.enabled = false;
-        //TODO: anim
+        anim.SetFloat("speed", 1);
+        anim.SetTrigger("open");
     }
 
     public void Close() {
-        Debug.Log("Closing door");
         col.enabled = true;
-        //TODO: anim
+        anim.SetFloat("speed", -1);
+        anim.SetTrigger("open");
     }
 }

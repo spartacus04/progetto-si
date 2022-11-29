@@ -38,18 +38,18 @@ public class PlayerMovement : MonoBehaviour
 			playerAnimator.SetTrigger("MoveLeft");
 			facingDirection = Vector2.left;
 		} else if (movement.y > 0) {
-			playerAnimator.SetTrigger("MoveUp");
+			playerAnimator.SetTrigger("Top");
 			facingDirection = Vector2.up;
 		} else if(movement.y < 0) {
-			playerAnimator.SetTrigger("MoveDown");
+			playerAnimator.SetTrigger("Down");
 			facingDirection = Vector2.down;
 		} else {
 			playerAnimator.SetTrigger("Idle" + facingDirection switch {
-				{ y: 1 } => "Top",
+				{ y: 1 } => "Up",
 				{ y: -1 } => "Down",
 				{ x: -1 } => "Left",
 				{ x: 1 } => "Right",
-				_ => "Top"
+				_ => ""
 			});
 			
 		}
