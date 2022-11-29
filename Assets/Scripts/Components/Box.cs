@@ -44,12 +44,12 @@ public class Box : MonoBehaviour
 	}
 
 	private void OnTriggerStay2D(Collider2D other) {
-		if(other.gameObject.GetComponent<WaterCurrent>() == null) return;
-		Debug.Log("water");
+		// if(other.gameObject.GetComponent<WaterCurrent>() == null) return;
+		// Debug.Log("water");
 
-        if(ThemeSwitcher.isDesert) return;
+        // if(ThemeSwitcher.isDesert) return;
         
-		transform.position += (Vector3)other.GetComponent<WaterCurrent>().direction * Time.deltaTime;
+		// transform.position += (Vector3)other.GetComponent<WaterCurrent>().direction * Time.deltaTime;
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
@@ -110,6 +110,11 @@ public class Box : MonoBehaviour
 	}
 
 	void Update() {
+		// non ho tempo per uno script fatto bene per ora hardcodo il movimento
+		if(transform.position.x == 101.5f && !ThemeSwitcher.isDesert && transform.localPosition.y < 10.5f) {
+			transform.position += Vector3.up * Time.deltaTime;
+		}
+
 		if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)) return;
 		if(isMoving) return;
 
