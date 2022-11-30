@@ -26,11 +26,13 @@ public class PauseMenu : MonoBehaviour
 				Time.timeScale = 1;
 				menu.SetActive(false);
 				isOpen = false;
+				Cursor.visible = false;
 			}
 		} else {
 			Time.timeScale = 0;
 			menu.SetActive(true);
 			isOpen = true;
+			Cursor.visible = true;
 		}
 	}
 
@@ -48,5 +50,6 @@ public class PauseMenu : MonoBehaviour
 		Time.timeScale = 1;
 		menu.SetActive(false);
 		isOpen = false;
+		Cursor.visible = false;
 	}
 }

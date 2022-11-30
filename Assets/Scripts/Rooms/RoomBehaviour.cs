@@ -45,12 +45,12 @@ public class RoomBehaviour : MonoBehaviour
 
 	private void Update() {
 		if(Input.GetKeyUp(KeyCode.R) && playerInRoom) {
-			// Brutto ma non ho voglia di tenere a mente il player
-			
+			reset();
 		}
 	}
 
 	public void reset() {
+		// Brutto ma non ho voglia di tenere a mente il player
 		var player = GameObject.FindGameObjectWithTag("Player");
 
 		var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();

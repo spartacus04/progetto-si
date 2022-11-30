@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+		Cursor.visible = false;
         rb = GetComponent<Rigidbody2D>();
 		playerAnimator = GetComponent<Animator>();
 		lastPosition = this.transform.position;

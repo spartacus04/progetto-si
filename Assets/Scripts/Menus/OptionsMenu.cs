@@ -51,6 +51,10 @@ public class OptionsMenu : MonoBehaviour
 		qualityDropDown.onValueChanged.AddListener(new UnityAction<int>(i => {
 			newOptions.quality = i;
 		}));
+
+		FullScreenToggle.onValueChanged.AddListener(new UnityAction<bool>(i => {
+			newOptions.fullscreen = i;
+		}));
 	}
 
 	public void Apply() {
