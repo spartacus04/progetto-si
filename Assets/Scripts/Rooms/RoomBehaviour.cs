@@ -46,34 +46,38 @@ public class RoomBehaviour : MonoBehaviour
 	private void Update() {
 		if(Input.GetKeyUp(KeyCode.R) && playerInRoom) {
 			// Brutto ma non ho voglia di tenere a mente il player
-			var player = GameObject.FindGameObjectWithTag("Player");
-
-			var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
-        	var handlers = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(ThemeHandler)) select (ThemeHandler)a).ToList();
 			
-			fadeInAnim.onTransition(1f);
-
-			Utils.setTimeout(() => {
-				// Chiedo scusa di nuovo per questo altro schifo
-				player.GetComponent<PlayerMovement>().camera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = RoomState.GetComponent<PolygonCollider2D>();
-
-				player.transform.position = (Vector2)playerStart.position;
-
-				if(!ThemeSwitcher.isDesert && defaultStyleIsDesert) {
-					ThemeSwitcher.isDesert = true;
-					handlers.ForEach(e => {
-						e.onDesert();
-					});
-				} else if(ThemeSwitcher.isDesert && !defaultStyleIsDesert) {
-					ThemeSwitcher.isDesert = false;
-					handlers.ForEach(e => {
-						e.onOcean();
-					});
-				}
-
-				RoomState.SetActive(true);
-				Destroy(gameObject);
-			}, 1f/3f/1f);
 		}
-	} 
+	}
+
+	public void reset() {
+		var player = GameObject.FindGameObjectWithTag("Player");
+
+		var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
+		var handlers = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(ThemeHandler)) select (ThemeHandler)a).ToList();
+		
+		fadeInAnim.onTransition(1f);
+
+		Utils.setTimeout(() => {
+			// Chiedo scusa di nuovo per questo altro schifo
+			player.GetComponent<PlayerMovement>().camera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = RoomState.GetComponent<PolygonCollider2D>();
+
+			player.transform.position = (Vector2)playerStart.position;
+
+			if(!ThemeSwitcher.isDesert && defaultStyleIsDesert) {
+				ThemeSwitcher.isDesert = true;
+				handlers.ForEach(e => {
+					e.onDesert();
+				});
+			} else if(ThemeSwitcher.isDesert && !defaultStyleIsDesert) {
+				ThemeSwitcher.isDesert = false;
+				handlers.ForEach(e => {
+					e.onOcean();
+				});
+			}
+
+			RoomState.SetActive(true);
+			Destroy(gameObject);
+		}, 1f/3f/1f);
+	}
 }
